@@ -49,3 +49,5 @@ end
 
 	ψ | l[ss] = 1/3
 end
+
+plot_irf(RBC_baseline)

@@ -484,3 +484,5 @@ end
 	inflationannual_exog = 1.02
 
 end
+
+plot_irf(QUEST3_2009)

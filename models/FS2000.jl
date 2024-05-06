@@ -1,3 +1,5 @@
+using MacroModelling
+
 @model FS2000 begin
     dA[0] = exp(gam + z_e_a  *  e_a[x])
 
