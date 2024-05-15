@@ -28,7 +28,6 @@ var
     nG_a_t $N^{G,a}$ nG_b_t $N^{G,b}$                                                       //Public Employment
     wr_a_t $w^{a}$ wr_b_t $w^{b}$                                                           //Real Wage
     wrG_a_t $w^{G,a}$ wrG_b_t $w^{G,b}$                                                     //Public wages
-    mg_a_t $mg^{a}$ mg_b_t $mg^{b}$                                                         //Public wage markup (time-varying)
     k_a_t $K^{a}$ k_b_t $K^{b}$                                                             //Total Capital
     k_o_a_t $K^{o,a}$ k_o_b_t $K^{o,b}$                                                     //Capital Optimizers
     mcr_a_t $mc^{a}$ mcr_b_t $mc^{b}$                                                       //Marginal Cost
@@ -42,13 +41,11 @@ var
     cG_a_t $C^{G,a}$ cG_b_t $C^{G,b}$                                                       //Public consumtpion
     tauw_a_t $\tau^a_w$ tauw_b_t $\tau^b_w$                                                 //Income taxes (includes social security contribution of employees)
     tausc_a_t $\tau^a_{sc}$ tausc_b_t $\tau^b_{sc}$                                         // Social security contribution (of employers)
-    tauk_a_t $\tau^a_k$ tauk_b_t $\tau^b_k$                                                 //Capital tax (depreciation deductable)
     tauc_a_t $\tau^a_c$ tauc_b_t $\tau^b_c$                                                 //Consumption tax (paid by consumers)
     TR_r_a_t $TR^{r,a}$ TR_r_b_t $TR^{r,b}$                                                 //Transfers (RoTs)
     TR_o_a_t $TR^{o,a}$ TR_o_b_t $TR^{o,b}$                                                 //Transfers (Optimizers)
     TR_a_t $TR^{a}$ TR_b_t $TR^{b}$                                                         //Total Transfers
     T_a_t $T^{a}$ T_b_t $T^{b}$                                                             //Lump Sum Transfers (Optimizers only)   
-    UB_a_t $UB^{a}$ UB_b_t $UB^{b}$                                                         // Unemployment benefit shock
     BG_a_t $B^{G,a}$ BG_b_t $B^{G,b}$                                                       //Real government debt
     kG_a_t $K^{G,a}$ kG_b_t $K^{G,b}$                                                       //Public capital stock
     inG_a_t $I^{G,a}$ inG_b_t $I^{G,b}$                                                     //Public cap investment
@@ -534,13 +531,8 @@ rho_UB_b = 0;
  nu_ein_a = 0;
  nu_ein_b = 0;
  
- % Public markup over private wages
-mg_a = 0.03;
-mg_b = 0.03;
 xi_b_emg_a = 0;
 xi_b_emg_b = 0;
-psi_mg_a = 0*0.757595;
-psi_mg_b = 0*0.806443;
 % AR coefficient (rho) and debt feedback (xi) of value-added tax
 rho_etau_a = 0;
 rho_etau_b = 0;
@@ -707,7 +699,6 @@ nfa_b_ts=0;
 nfa_c_ts=0;
 % NOTE: (D112) 
 B_c_ts   = 0;
-B_ba_ts  = 0;
 B_a_ts   = 0;
 B_ac_ts  = 0;
 B_bc_ts  = 0;
@@ -814,11 +805,11 @@ lambda_r_b_t=exp(e_b_b_t)*(c_r_b_t-hab_b*c_r_b_t(-1))^(-sigma_b)/(1+tauc_b_t);
 //*************************************************************************
 // Labor force particpation constraint
 // NOTE: (A9)
-lambda_o_a_t*((1-tauw_a_t)*(wr_a_t*nP_a_t+wrG_a_t*nG_a_t)+UB_a_t*(l_o_a_t-n_a_t)) = kappaw_a_t*exp(e_n_a_t)*l_o_a_t^(psi_a)*n_a_t;
-lambda_o_b_t*((1-tauw_b_t)*(wr_b_t*nP_b_t+wrG_b_t*nG_b_t)+UB_b_t*(l_o_b_t-n_b_t)) = kappaw_b_t*exp(e_n_b_t)*l_o_b_t^(psi_b)*n_b_t;
+lambda_o_a_t*((1-tauw_a_t)*(wr_a_t*nP_a_t+wrG_a_t*nG_a_t)+UB_a*(l_o_a_t-n_a_t)) = kappaw_a_t*exp(e_n_a_t)*l_o_a_t^(psi_a)*n_a_t;
+lambda_o_b_t*((1-tauw_b_t)*(wr_b_t*nP_b_t+wrG_b_t*nG_b_t)+UB_b*(l_o_b_t-n_b_t)) = kappaw_b_t*exp(e_n_b_t)*l_o_b_t^(psi_b)*n_b_t;
 // NOTE: (A10)
-lambda_r_a_t*((1-tauw_a_t)*(wr_a_t*nP_a_t+wrG_a_t*nG_a_t)+UB_a_t*(l_r_a_t-n_a_t)) = kappaw_a_t*exp(e_n_a_t)*l_r_a_t^(psi_a)*n_a_t;
-lambda_r_b_t*((1-tauw_b_t)*(wr_b_t*nP_b_t+wrG_b_t*nG_b_t)+UB_b_t*(l_r_b_t-n_b_t)) = kappaw_b_t*exp(e_n_b_t)*l_r_b_t^(psi_b)*n_b_t;
+lambda_r_a_t*((1-tauw_a_t)*(wr_a_t*nP_a_t+wrG_a_t*nG_a_t)+UB_a*(l_r_a_t-n_a_t)) = kappaw_a_t*exp(e_n_a_t)*l_r_a_t^(psi_a)*n_a_t;
+lambda_r_b_t*((1-tauw_b_t)*(wr_b_t*nP_b_t+wrG_b_t*nG_b_t)+UB_b*(l_r_b_t-n_b_t)) = kappaw_b_t*exp(e_n_b_t)*l_r_b_t^(psi_b)*n_b_t;
 // NOTE: (A11)
 l_a_t = mu_a*l_r_a_t + (1-mu_a)*l_o_a_t;
 l_b_t = mu_b*l_r_b_t + (1-mu_b)*l_o_b_t;
@@ -840,14 +831,14 @@ pi_w_a_t = wr_a_t/wr_a_t(-1)*pi_a_t;
 pi_w_b_t = wr_b_t/wr_b_t(-1)*pi_b_t;
 // NOTE: (A18)
 // Union bargaining solution
-(mu_a*lambda_r_a_t + (1-mu_a)*lambda_o_a_t)*((1-tauw_a_t)*(thetaw_a_t*nP_a_t-nP_a_t) - UB_a_t*thetaw_a_t*nP_a_t/wr_a_t + upsilon_w_a*(pi_w_a_t/(pi_w_a_t(-1)^xiw_a*pi_ts^(1-xiw_a))-1)*pi_w_a_t/(pi_w_a_t(-1)^xiw_a*pi_ts^(1-xiw_a))) - (lambda_o_a_t*omega_o_a_t+lambda_r_a_t*omega_r_a_t)*((1-tauw_a_t)*(thetaw_a_t*nP_a_t-nP_a_t) - UB_a_t*thetaw_a_t*nP_a_t/wr_a_t) + omega_r_a_t*l_r_a_t^psi_a*nP_a_t*thetaw_a_t*kappaw_a_t/wr_a_t*exp(e_n_a_t)*exp(e_b_a_t) + omega_o_a_t*l_o_a_t^psi_a*nP_a_t*thetaw_a_t*kappaw_a_t/wr_a_t*exp(e_n_a_t)*exp(e_b_a_t) = n_a_t^psi_a*thetaw_a_t*kappaw_a_t*nP_a_t/wr_a_t*exp(e_n_a_t)*exp(e_b_a_t) + betta_a*(mu_a*lambda_r_a_t(+1)+(1-mu_a)*lambda_o_a_t(+1))*upsilon_w_a*(pi_w_a_t(+1)/(pi_w_a_t^xiw_a*pi_ts^(1-xiw_a))-1)*pi_w_a_t(+1)^2*1/(pi_a_t(+1)*(pi_w_a_t(-1)^xiw_a*pi_ts^(1-xiw_a)));
-(mu_b*lambda_r_b_t + (1-mu_b)*lambda_o_b_t)*((1-tauw_b_t)*(thetaw_b_t*nP_b_t-nP_b_t) - UB_b_t*thetaw_b_t*nP_b_t/wr_b_t + upsilon_w_b*(pi_w_b_t/(pi_w_b_t(-1)^xiw_b*pi_ts^(1-xiw_b))-1)*pi_w_b_t/(pi_w_b_t(-1)^xiw_b*pi_ts^(1-xiw_b))) - (lambda_o_b_t*omega_o_b_t+lambda_r_b_t*omega_r_b_t)*((1-tauw_b_t)*(thetaw_b_t*nP_b_t-nP_b_t) - UB_b_t*thetaw_b_t*nP_b_t/wr_b_t) + omega_r_b_t*l_r_b_t^psi_b*nP_b_t*thetaw_b_t*kappaw_b_t/wr_b_t*exp(e_n_b_t)*exp(e_b_b_t) + omega_o_b_t*l_o_b_t^psi_b*nP_b_t*thetaw_b_t*kappaw_b_t/wr_b_t*exp(e_n_b_t)*exp(e_b_b_t) = n_b_t^psi_b*thetaw_b_t*kappaw_b_t*nP_b_t/wr_b_t*exp(e_n_b_t)*exp(e_b_b_t) + betta_b*(mu_b*lambda_r_b_t(+1)+(1-mu_b)*lambda_o_b_t(+1))*upsilon_w_b*(pi_w_b_t(+1)/(pi_w_b_t^xiw_b*pi_ts^(1-xiw_b))-1)*pi_w_b_t(+1)^2*1/(pi_b_t(+1)*(pi_w_b_t^xiw_b*pi_ts^(1-xiw_b)));
+(mu_a*lambda_r_a_t + (1-mu_a)*lambda_o_a_t)*((1-tauw_a_t)*(thetaw_a_t*nP_a_t-nP_a_t) - UB_a*thetaw_a_t*nP_a_t/wr_a_t + upsilon_w_a*(pi_w_a_t/(pi_w_a_t(-1)^xiw_a*pi_ts^(1-xiw_a))-1)*pi_w_a_t/(pi_w_a_t(-1)^xiw_a*pi_ts^(1-xiw_a))) - (lambda_o_a_t*omega_o_a_t+lambda_r_a_t*omega_r_a_t)*((1-tauw_a_t)*(thetaw_a_t*nP_a_t-nP_a_t) - UB_a*thetaw_a_t*nP_a_t/wr_a_t) + omega_r_a_t*l_r_a_t^psi_a*nP_a_t*thetaw_a_t*kappaw_a_t/wr_a_t*exp(e_n_a_t)*exp(e_b_a_t) + omega_o_a_t*l_o_a_t^psi_a*nP_a_t*thetaw_a_t*kappaw_a_t/wr_a_t*exp(e_n_a_t)*exp(e_b_a_t) = n_a_t^psi_a*thetaw_a_t*kappaw_a_t*nP_a_t/wr_a_t*exp(e_n_a_t)*exp(e_b_a_t) + betta_a*(mu_a*lambda_r_a_t(+1)+(1-mu_a)*lambda_o_a_t(+1))*upsilon_w_a*(pi_w_a_t(+1)/(pi_w_a_t^xiw_a*pi_ts^(1-xiw_a))-1)*pi_w_a_t(+1)^2*1/(pi_a_t(+1)*(pi_w_a_t(-1)^xiw_a*pi_ts^(1-xiw_a)));
+(mu_b*lambda_r_b_t + (1-mu_b)*lambda_o_b_t)*((1-tauw_b_t)*(thetaw_b_t*nP_b_t-nP_b_t) - UB_b*thetaw_b_t*nP_b_t/wr_b_t + upsilon_w_b*(pi_w_b_t/(pi_w_b_t(-1)^xiw_b*pi_ts^(1-xiw_b))-1)*pi_w_b_t/(pi_w_b_t(-1)^xiw_b*pi_ts^(1-xiw_b))) - (lambda_o_b_t*omega_o_b_t+lambda_r_b_t*omega_r_b_t)*((1-tauw_b_t)*(thetaw_b_t*nP_b_t-nP_b_t) - UB_b*thetaw_b_t*nP_b_t/wr_b_t) + omega_r_b_t*l_r_b_t^psi_b*nP_b_t*thetaw_b_t*kappaw_b_t/wr_b_t*exp(e_n_b_t)*exp(e_b_b_t) + omega_o_b_t*l_o_b_t^psi_b*nP_b_t*thetaw_b_t*kappaw_b_t/wr_b_t*exp(e_n_b_t)*exp(e_b_b_t) = n_b_t^psi_b*thetaw_b_t*kappaw_b_t*nP_b_t/wr_b_t*exp(e_n_b_t)*exp(e_b_b_t) + betta_b*(mu_b*lambda_r_b_t(+1)+(1-mu_b)*lambda_o_b_t(+1))*upsilon_w_b*(pi_w_b_t(+1)/(pi_w_b_t^xiw_b*pi_ts^(1-xiw_b))-1)*pi_w_b_t(+1)^2*1/(pi_b_t(+1)*(pi_w_b_t^xiw_b*pi_ts^(1-xiw_b)));
 // NOTE: (A16)
-mu_a*lambda_r_a_t*UB_a_t = omega_r_a_t*(lambda_r_a_t*UB_a_t-psi_a*l_r_a_t^(psi_a-1)*n_a_t*kappaw_a_t);
-mu_b*lambda_r_b_t*UB_b_t = omega_r_b_t*(lambda_r_b_t*UB_b_t-psi_b*l_r_b_t^(psi_b-1)*n_b_t*kappaw_b_t);
+mu_a*lambda_r_a_t*UB_a = omega_r_a_t*(lambda_r_a_t*UB_a-psi_a*l_r_a_t^(psi_a-1)*n_a_t*kappaw_a_t);
+mu_b*lambda_r_b_t*UB_b = omega_r_b_t*(lambda_r_b_t*UB_b-psi_b*l_r_b_t^(psi_b-1)*n_b_t*kappaw_b_t);
 // NOTE: (A17)
-(1-mu_a)*lambda_o_a_t*UB_a_t = omega_o_a_t*(lambda_o_a_t*UB_a_t-psi_a*l_o_a_t^(psi_a-1)*n_a_t*kappaw_a_t);
-(1-mu_b)*lambda_o_b_t*UB_b_t = omega_o_b_t*(lambda_o_b_t*UB_b_t-psi_b*l_o_b_t^(psi_b-1)*n_b_t*kappaw_b_t);
+(1-mu_a)*lambda_o_a_t*UB_a = omega_o_a_t*(lambda_o_a_t*UB_a-psi_a*l_o_a_t^(psi_a-1)*n_a_t*kappaw_a_t);
+(1-mu_b)*lambda_o_b_t*UB_b = omega_o_b_t*(lambda_o_b_t*UB_b-psi_b*l_o_b_t^(psi_b-1)*n_b_t*kappaw_b_t);
 //*************************************************************************
 // Government
 //*************************************************************************
@@ -870,18 +861,12 @@ tauw_b_t-tauw_b = rho_etauw_b*(tauw_b_t(-1)-tauw_b) + xi_b_etauw_b*log(BG_b_t(-1
 // NOTE: (A24)
 tausc_a_t - tausc_a = rho_etausc_a*(tausc_a_t(-1)-tausc_a) + xi_b_etausc_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_etausc_a*log(y_a_t(-1)/y_a_ts) + psi_tausc_a*nua_etausc + (1-psi_tausc_a)*nua_etausc(-1);
 tausc_b_t = tausc_b + rho_etausc_b*(tausc_b_t(-1)-tausc_b) + xi_b_etausc_b*log(BG_b_t(-1)/BG_b_ts) + xi_y_etausc_b*log(y_b_t(-1)/y_b_ts) + psi_tausc_b*nub_etausc + (1-psi_tausc_b)*nub_etausc(-1);
-// NOTE: (A25)
-tauk_b_t = tauk_b;
-tauk_a_t = tauk_a;
 // NOTE: (A26)
 tauc_a_t = tauc_a + rho_etauc_a*(tauc_a_t(-1)-tauc_a) + xi_b_etauc_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_etauc_a*log(y_a_t(-1)/y_a_ts) + psi_tauc_a*nua_etauc + (1-psi_tauc_a)*nua_etauc(-1);
 tauc_b_t = tauc_b + rho_etauc_b*(tauc_b_t(-1)-tauc_b) + xi_b_etauc_b*log(BG_b_t(-1)/BG_b_ts) + xi_y_etauc_b*log(y_b_t(-1)/y_b_ts) + psi_tauc_b*nub_etauc + (1-psi_tauc_b)*nub_etauc(-1);
 // NOTE: (A27)
 nG_a_t = nG_a_ts + rho_enG_a*(nG_a_t(-1)-nG_a_ts) - xi_b_enG_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_enG_a*log(y_a_t(-1)/y_a_ts) + psi_nG_a*nua_enG + (1-psi_nG_a)*nua_enG(-1);
 nG_b_t = nG_b_ts + rho_enG_b*(nG_b_t(-1)-nG_b_ts) - xi_b_enG_b*log(BG_b_t(-1)/BG_b_ts) + xi_y_enG_b*log(y_b_t(-1)/y_b_ts) + psi_nG_b*nub_enG + (1-psi_nG_b)*nub_enG(-1);
-// TODO: clarify
-UB_a_t = UB_a;
-UB_b_t = UB_b;
 // NOTE: (A29)
 TR_a_t = mu_a*TR_r_a_t + (1-mu_a)*TR_o_a_t;
 TR_b_t = (1-mu_b)*TR_o_b_t + mu_b*TR_r_b_t;
@@ -889,17 +874,14 @@ TR_b_t = (1-mu_b)*TR_o_b_t + mu_b*TR_r_b_t;
 mu_bar_a*(TR_o_a_t/TR_o_a_ts-1) = (1-mu_bar_a)*(TR_r_a_t/TR_r_a_ts-1);
 mu_bar_b*(TR_o_b_t/TR_o_b_ts-1) = (1-mu_bar_b)*(TR_r_b_t/TR_r_b_ts-1);
 // NOTE: (A31)
-cG_a_t*pr_aa_t + TR_a_t + UB_a_t*(mu_a*(l_r_a_t-n_a_t)+(1-mu_a)*(l_o_a_t-n_a_t)) + inG_a_t*pr_aa_t + (1+tausc_a_t)*wrG_a_t*nG_a_t +(1+i_Ga_t(-1))*BG_a_t(-1)/pi_a_t = BG_a_t + (tauw_a_t+tausc_a_t)*(wr_a_t*nP_a_t+wrG_a_t*nG_a_t) + tauk_a_t*(rk_a_t-delta_a)*k_a_t(-1) + tau_a*exp(e_tau_a_t)*y_a_t*pr_aa_t + tauc_a_t*c_a_t + (1-mu_a)*T_a_t;
-cG_b_t*pr_bb_t + TR_b_t + UB_b_t*(mu_b*(l_r_b_t-n_b_t)+(1-mu_b)*(l_o_b_t-n_b_t)) + inG_b_t*pr_bb_t + (1+tausc_b_t)*wrG_b_t*nG_b_t +(1+i_Gb_t(-1))*BG_b_t(-1)/pi_b_t = BG_b_t + (tauw_b_t+tausc_b_t)*(wr_b_t*nP_b_t+wrG_b_t*nG_b_t) + tauk_b_t*(rk_b_t-delta_b)*k_b_t(-1) + tau_b*exp(e_tau_b_t)*y_b_t*pr_bb_t + tauc_b_t*c_b_t + (1-mu_b)*T_b_t;
+cG_a_t*pr_aa_t + TR_a_t + UB_a*(mu_a*(l_r_a_t-n_a_t)+(1-mu_a)*(l_o_a_t-n_a_t)) + inG_a_t*pr_aa_t + (1+tausc_a_t)*wrG_a_t*nG_a_t +(1+i_Ga_t(-1))*BG_a_t(-1)/pi_a_t = BG_a_t + (tauw_a_t+tausc_a_t)*(wr_a_t*nP_a_t+wrG_a_t*nG_a_t) + tauk_a*(rk_a_t-delta_a)*k_a_t(-1) + tau_a*exp(e_tau_a_t)*y_a_t*pr_aa_t + tauc_a_t*c_a_t + (1-mu_a)*T_a_t;
+cG_b_t*pr_bb_t + TR_b_t + UB_b*(mu_b*(l_r_b_t-n_b_t)+(1-mu_b)*(l_o_b_t-n_b_t)) + inG_b_t*pr_bb_t + (1+tausc_b_t)*wrG_b_t*nG_b_t +(1+i_Gb_t(-1))*BG_b_t(-1)/pi_b_t = BG_b_t + (tauw_b_t+tausc_b_t)*(wr_b_t*nP_b_t+wrG_b_t*nG_b_t) + tauk_b*(rk_b_t-delta_b)*k_b_t(-1) + tau_b*exp(e_tau_b_t)*y_b_t*pr_bb_t + tauc_b_t*c_b_t + (1-mu_b)*T_b_t;
 // NOTE: (A32)
 kG_a_t = (1-delta_a)*kG_a_t(-1) + inG_a_t;
 kG_b_t = (1-delta_b)*kG_b_t(-1) + inG_b_t;
 // NOTE: (A33)
 yG_a_t = z_a*kG_a_t^eta_kG_a*nG_a_t^eta_nG_a;
 yG_b_t = z_b*kG_b_t^eta_kG_b*nG_b_t^eta_nG_b;
-// TODO: to clarify
-mg_a_t = mg_a;
-mg_b_t = mg_b;
 // NOTE: (A28)
 log(wrG_a_t/wrG_a_ts) = rho_emg_a*log(wrG_a_t(-1)/wrG_a_ts) - xi_b_emg_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_emg_a*log(y_a_t(-1)/y_a_ts) + psi_mg_a*nua_emg + (1-psi_mg_a)*nua_emg(-1);
 log(wrG_b_t/wrG_b_ts) = rho_emg_b*log(wrG_b_t(-1)/wrG_b_ts) - xi_b_emg_b*log(BG_b_t(-1)/BG_b_ts) + xi_y_emg_b*log(y_b_t(-1)/y_b_ts) + psi_mg_b*nub_emg + (1-psi_mg_b)*nub_emg(-1);
@@ -919,8 +901,8 @@ k_o_b_t=(1-delta_b)*k_o_b_t(-1)+(in_o_b_t-in_o_b_t*((upsilon_b/2)*((in_o_b_t/in_
 1=betta_a*(lambda_o_a_t(+1)/lambda_o_a_t)/pi_a_t(+1)*(1+Rk_a_t(+1));
 1=betta_b*(lambda_o_b_t(+1)/lambda_o_b_t)/pi_b_t(+1)*(1+Rk_b_t(+1));
 // NOTE: (A5)
-Rk_a_t=pi_a_t*(q_a_t*(1-delta_a)+(1-tauk_a_t)*(rk_a_t)+tauk_a_t*delta_a)/q_a_t(-1)-1;
-Rk_b_t=pi_b_t*(q_b_t*(1-delta_b)+(1-tauk_b_t)*(rk_b_t)+tauk_b_t*delta_b)/q_b_t(-1)-1;
+Rk_a_t=pi_a_t*(q_a_t*(1-delta_a)+(1-tauk_a)*(rk_a_t)+tauk_a*delta_a)/q_a_t(-1)-1;
+Rk_b_t=pi_b_t*(q_b_t*(1-delta_b)+(1-tauk_b)*(rk_b_t)+tauk_b*delta_b)/q_b_t(-1)-1;
 // NOTE: (A6)
 1=q_a_t*(1-((upsilon_a/2)*((in_o_a_t/in_o_a_t(-1))-1)^2)-upsilon_a*(in_o_a_t/in_o_a_t(-1))*((in_o_a_t/in_o_a_t(-1))-1))*exp(e_in_a_t)+
 betta_a*(lambda_o_a_t(+1)/lambda_o_a_t)*q_a_t(+1)*(upsilon_a*((in_o_a_t(+1)/in_o_a_t)^2)*((in_o_a_t(+1)/in_o_a_t)-1))*(exp(e_in_a_t(+1)));
@@ -960,8 +942,8 @@ c_bc_t = mu_b*n_bc*(pr_bc_t)^(-eta_b)*c_r_b_t + (1-mu_b)*n_bc*(pr_bc_t)^(-eta_b)
 in_ac_t = (1-mu_a)*n_ac*(pr_ac_t)^(-eta_a)*in_o_a_t;
 in_bc_t = (1-mu_b)*n_bc*(pr_bc_t)^(-eta_b)*in_o_b_t;
 // NOTE: (A7)
-(1+tauc_a_t)*c_r_a_t = (1-tauw_a_t)*(nP_a_t*wr_a_t+nG_a_t*wrG_a_t) + UB_a_t*(l_r_a_t-n_a_t) + TR_r_a_t;
-(1+tauc_b_t)*c_r_b_t = (1-tauw_b_t)*(nP_b_t*wr_b_t+nG_b_t*wrG_b_t) + UB_b_t*(l_r_b_t-n_b_t) + TR_r_b_t;
+(1+tauc_a_t)*c_r_a_t = (1-tauw_a_t)*(nP_a_t*wr_a_t+nG_a_t*wrG_a_t) + UB_a*(l_r_a_t-n_a_t) + TR_r_a_t;
+(1+tauc_b_t)*c_r_b_t = (1-tauw_b_t)*(nP_b_t*wr_b_t+nG_b_t*wrG_b_t) + UB_b*(l_r_b_t-n_b_t) + TR_r_b_t;
 // NOTE: (A49)
 c_a_t = mu_a*c_r_a_t + (1-mu_a)*c_o_a_t;
 c_b_t = mu_b*c_r_b_t + (1-mu_b)*c_o_b_t;
@@ -1190,8 +1172,6 @@ tauw_a_t = tauw_a;
 tauw_b_t =tauw_b;
 tausc_a_t = tausc_a;
 tausc_b_t = tausc_b;
-tauk_a_t = tauk_a;
-tauk_b_t = tauk_b;
 tauc_a_t = tauc_a;
 tauc_b_t = tauc_b;
 TR_r_a_t = TR_r_a_ts;
@@ -1202,8 +1182,6 @@ TR_a_t = TR_a_ts;
 TR_b_t = TR_b_ts;
 T_a_t = T_a_ts;
 T_b_t = T_b_ts;
-UB_a_t = UB_a;
-UB_b_t = UB_b;
 BG_a_t = BG_a_ts;
 BG_b_t = BG_b_ts;
 kG_a_t   = kG_a_ts;
@@ -1283,8 +1261,6 @@ e_RoE_a_t=0;
 e_RoE_b_t=0;
 e_tau_a_t=0;
 e_tau_b_t=0;
-mg_a_t=mg_a;
-mg_b_t=mg_a;
 pi_c_var_t=0;
 i_c_var_t=0;
 y_c_var_t=0;
