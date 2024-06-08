@@ -1,4 +1,5 @@
 using MacroModelling
+using StatsPlots
 
 # The model below is the same one used in the website tutorial by Thore; the same is for all applications listed below
 @model RBC begin
@@ -18,3 +19,5 @@ end
 	α = 0.5
 	β = 0.95
 end
+
+plot_irf(RBC)

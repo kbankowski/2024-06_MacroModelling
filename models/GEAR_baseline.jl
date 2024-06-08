@@ -1101,3 +1101,6 @@ end
 
 end
 
+# plot_irf(GEAR_baseline)
+
+# get_steady_state(GEAR_baseline)

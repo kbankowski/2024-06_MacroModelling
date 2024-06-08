@@ -769,4 +769,7 @@ end
 	US_RER = 1
 end
 
+plot_irf(NAWM_EAUS_2008)
 
+
+get_steady_state(NAWM_EAUS_2008)
