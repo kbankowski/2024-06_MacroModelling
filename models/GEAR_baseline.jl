@@ -434,7 +434,7 @@ using MacroModelling
 end
 
 
-@parameters GEAR_baseline begin
+@parameters GEAR_baseline precompile = true begin
 	mu_a = 0.282477238710735000
 
 	mu_bar_a = 0.476287322349070000
