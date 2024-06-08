@@ -57,37 +57,37 @@ using MacroModelling
 
 	UB_b * lambda_o_b_t[0] * (1 - mu_b) = omega_o_b_t[0] * (lambda_o_b_t[0] * UB_b - kappaw_b_t[0] * n_b_t[0] * psi_b * l_o_b_t[0] ^ (psi_b - 1))
 
-	log(cG_a_t[0] / cG_a_ts) = rho_eg_a * log(cG_a_t[-1] / cG_a_ts) - xi_b_eg_a * log(BG_a_t[-1] / BG_a_ts) - xi_y_eg_a * log(y_a_t[-1] / y_a_ts) + nua_ecG[x]
+	log(cG_a_t[0] / cG_a_ts) = rho_eg_a * log(cG_a_t[-1] / cG_a_ts) - xi_b_eg_a * log(BG_a_t[-1] / BG_a_ts) - xi_y_eg_a * log(y_a_t[-1] / y_a_ts) + psi_cG_a * nua_ecG[x] + (1 - psi_cG_a) * AUX_EXO_LAG_211_0[-1]
 
-	log(cG_b_t[0] / cG_b_ts) = rho_eg_b * log(cG_b_t[-1] / cG_b_ts) - xi_b_eg_b * log(BG_b_t[-1] / BG_b_ts) - xi_y_eg_b * log(y_b_t[-1] / y_b_ts) + nub_ecG[x]
+	log(cG_b_t[0] / cG_b_ts) = rho_eg_b * log(cG_b_t[-1] / cG_b_ts) - xi_b_eg_b * log(BG_b_t[-1] / BG_b_ts) - xi_y_eg_b * log(y_b_t[-1] / y_b_ts) + psi_cG_b * nub_ecG[x] + (1 - psi_cG_b) * AUX_EXO_LAG_212_0[-1]
 
-	log(inG_a_t[0] / inG_a_ts) = rho_einG_a * log(inG_a_t[-1] / inG_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_ein_a - log(y_a_t[-1] / y_a_ts) * xi_y_ein_a + nua_einG[x]
+	log(inG_a_t[0] / inG_a_ts) = rho_einG_a * log(inG_a_t[-1] / inG_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_ein_a - log(y_a_t[-1] / y_a_ts) * xi_y_ein_a + psi_inG_a * nua_einG[x] + (1 - psi_inG_a) * AUX_EXO_LAG_221_0[-1]
 
-	log(inG_b_t[0] / inG_b_ts) = rho_einG_b * log(inG_b_t[-1] / inG_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_ein_b - log(y_b_t[-1] / y_b_ts) * xi_y_ein_b + nub_einG[x]
+	log(inG_b_t[0] / inG_b_ts) = rho_einG_b * log(inG_b_t[-1] / inG_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_ein_b - log(y_b_t[-1] / y_b_ts) * xi_y_ein_b + psi_inG_b * nub_einG[x] + (1 - psi_inG_b) * AUX_EXO_LAG_222_0[-1]
 
-	log(TR_a_t[0] / TR_a_ts) = rho_eTR_a * log(TR_a_t[-1] / TR_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_eTR_a - log(y_a_t[-1] / y_a_ts) * xi_y_eTR_a + nua_eTR[x]
+	log(TR_a_t[0] / TR_a_ts) = rho_eTR_a * log(TR_a_t[-1] / TR_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_eTR_a - log(y_a_t[-1] / y_a_ts) * xi_y_eTR_a + psi_TR_a * nua_eTR[x] + (1 - psi_TR_a) * AUX_EXO_LAG_225_0[-1]
 
-	log(TR_b_t[0] / TR_b_ts) = rho_eTR_b * log(TR_b_t[-1] / TR_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_eTR_b - log(y_b_t[-1] / y_b_ts) * xi_y_eTR_b + nub_eTR[x]
+	log(TR_b_t[0] / TR_b_ts) = rho_eTR_b * log(TR_b_t[-1] / TR_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_eTR_b - log(y_b_t[-1] / y_b_ts) * xi_y_eTR_b + psi_TR_b * nub_eTR[x] + (1 - psi_TR_b) * AUX_EXO_LAG_226_0[-1]
 
-	(T_a_t[0] - T_a_ts) / y_a_ts = rho_eT_a * (T_a_t[-1] - T_a_ts) / y_a_ts + log(BG_a_t[-1] / BG_a_ts) * xi_b_eT_a + log(y_a_t[-1] / y_a_ts) * xi_y_eT_a + nua_eT[x]
+	(T_a_t[0] - T_a_ts) / y_a_ts = rho_eT_a * (T_a_t[-1] - T_a_ts) / y_a_ts + log(BG_a_t[-1] / BG_a_ts) * xi_b_eT_a + log(y_a_t[-1] / y_a_ts) * xi_y_eT_a + psi_T_a * nua_eT[x] + (1 - psi_T_a) * AUX_EXO_LAG_227_0[-1]
 
-	(T_b_t[0] - T_b_ts) / y_b_ts = rho_eT_b * (T_b_t[-1] - T_b_ts) / y_b_ts + log(BG_b_t[-1] / BG_b_ts) * xi_b_eT_b + log(y_b_t[-1] / y_b_ts) * xi_y_eT_b + nub_eT[x]
+	(T_b_t[0] - T_b_ts) / y_b_ts = rho_eT_b * (T_b_t[-1] - T_b_ts) / y_b_ts + log(BG_b_t[-1] / BG_b_ts) * xi_b_eT_b + log(y_b_t[-1] / y_b_ts) * xi_y_eT_b + psi_T_b * nub_eT[x] + (1 - psi_T_b) * AUX_EXO_LAG_228_0[-1]
 
-	tauw_a_t[0] - tauw_a = rho_etauw_a * (tauw_a_t[-1] - tauw_a) + log(BG_a_t[-1] / BG_a_ts) * xi_b_etauw_a + log(y_a_t[-1] / y_a_ts) * xi_y_etauw_a + nua_etauw[x]
+	tauw_a_t[0] - tauw_a = rho_etauw_a * (tauw_a_t[-1] - tauw_a) + log(BG_a_t[-1] / BG_a_ts) * xi_b_etauw_a + log(y_a_t[-1] / y_a_ts) * xi_y_etauw_a + psi_tauw_a * nua_etauw[x] + (1 - psi_tauw_a) * AUX_EXO_LAG_215_0[-1]
 
-	tauw_b_t[0] - tauw_b = rho_etauw_b * (tauw_b_t[-1] - tauw_b) + log(BG_b_t[-1] / BG_b_ts) * xi_b_etauw_b + log(y_b_t[-1] / y_b_ts) * xi_y_etauw_b + nub_etauw[x]
+	tauw_b_t[0] - tauw_b = rho_etauw_b * (tauw_b_t[-1] - tauw_b) + log(BG_b_t[-1] / BG_b_ts) * xi_b_etauw_b + log(y_b_t[-1] / y_b_ts) * xi_y_etauw_b + psi_tauw_b * nub_etauw[x] + (1 - psi_tauw_b) * AUX_EXO_LAG_216_0[-1]
 
-	tausc_a_t[0] - tausc_a = rho_etausc_a * (tausc_a_t[-1] - tausc_a) + log(BG_a_t[-1] / BG_a_ts) * xi_b_etausc_a + log(y_a_t[-1] / y_a_ts) * xi_y_etausc_a + nua_etausc[x]
+	tausc_a_t[0] - tausc_a = rho_etausc_a * (tausc_a_t[-1] - tausc_a) + log(BG_a_t[-1] / BG_a_ts) * xi_b_etausc_a + log(y_a_t[-1] / y_a_ts) * xi_y_etausc_a + psi_tausc_a * nua_etausc[x] + (1 - psi_tausc_a) * AUX_EXO_LAG_217_0[-1]
 
-	tausc_b_t[0] = tausc_b + rho_etausc_b * (tausc_b_t[-1] - tausc_b) + log(BG_b_t[-1] / BG_b_ts) * xi_b_etausc_b + log(y_b_t[-1] / y_b_ts) * xi_y_etausc_b + nub_etausc[x]
+	tausc_b_t[0] = tausc_b + rho_etausc_b * (tausc_b_t[-1] - tausc_b) + log(BG_b_t[-1] / BG_b_ts) * xi_b_etausc_b + log(y_b_t[-1] / y_b_ts) * xi_y_etausc_b + psi_tausc_b * nub_etausc[x] + (1 - psi_tausc_b) * AUX_EXO_LAG_218_0[-1]
 
-	tauc_a_t[0] = tauc_a + rho_etauc_a * (tauc_a_t[-1] - tauc_a) + log(BG_a_t[-1] / BG_a_ts) * xi_b_etauc_a + log(y_a_t[-1] / y_a_ts) * xi_y_etauc_a + nua_etauc[x]
+	tauc_a_t[0] = tauc_a + rho_etauc_a * (tauc_a_t[-1] - tauc_a) + log(BG_a_t[-1] / BG_a_ts) * xi_b_etauc_a + log(y_a_t[-1] / y_a_ts) * xi_y_etauc_a + psi_tauc_a * nua_etauc[x] + (1 - psi_tauc_a) * AUX_EXO_LAG_219_0[-1]
 
-	tauc_b_t[0] = tauc_b + rho_etauc_b * (tauc_b_t[-1] - tauc_b) + log(BG_b_t[-1] / BG_b_ts) * xi_b_etauc_b + log(y_b_t[-1] / y_b_ts) * xi_y_etauc_b + nub_etauc[x]
+	tauc_b_t[0] = tauc_b + rho_etauc_b * (tauc_b_t[-1] - tauc_b) + log(BG_b_t[-1] / BG_b_ts) * xi_b_etauc_b + log(y_b_t[-1] / y_b_ts) * xi_y_etauc_b + psi_tauc_b * nub_etauc[x] + (1 - psi_tauc_b) * AUX_EXO_LAG_220_0[-1]
 
-	nG_a_t[0] = nG_a_ts + rho_enG_a * (nG_a_t[-1] - nG_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_enG_a + log(y_a_t[-1] / y_a_ts) * xi_y_enG_a + nua_enG[x]
+	nG_a_t[0] = nG_a_ts + rho_enG_a * (nG_a_t[-1] - nG_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_enG_a + log(y_a_t[-1] / y_a_ts) * xi_y_enG_a + psi_nG_a * nua_enG[x] + (1 - psi_nG_a) * AUX_EXO_LAG_223_0[-1]
 
-	nG_b_t[0] = nG_b_ts + rho_enG_b * (nG_b_t[-1] - nG_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_enG_b + log(y_b_t[-1] / y_b_ts) * xi_y_enG_b + nub_enG[x]
+	nG_b_t[0] = nG_b_ts + rho_enG_b * (nG_b_t[-1] - nG_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_enG_b + log(y_b_t[-1] / y_b_ts) * xi_y_enG_b + psi_nG_b * nub_enG[x] + (1 - psi_nG_b) * AUX_EXO_LAG_224_0[-1]
 
 	TR_a_t[0] = mu_a * TR_r_a_t[0] + (1 - mu_a) * TR_o_a_t[0]
 
@@ -109,9 +109,9 @@ using MacroModelling
 
 	yG_b_t[0] = z_b * kG_b_t[0] ^ eta_kG_b * nG_b_t[0] ^ eta_nG_b
 
-	log(wrG_a_t[0] / wrG_a_ts) = rho_emg_a * log(wrG_a_t[-1] / wrG_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_emg_a + log(y_a_t[-1] / y_a_ts) * xi_y_emg_a + nua_emg[x]
+	log(wrG_a_t[0] / wrG_a_ts) = rho_emg_a * log(wrG_a_t[-1] / wrG_a_ts) - log(BG_a_t[-1] / BG_a_ts) * xi_b_emg_a + log(y_a_t[-1] / y_a_ts) * xi_y_emg_a + psi_mg_a * nua_emg[x] + (1 - psi_mg_a) * AUX_EXO_LAG_229_0[-1]
 
-	log(wrG_b_t[0] / wrG_b_ts) = rho_emg_b * log(wrG_b_t[-1] / wrG_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_emg_b + log(y_b_t[-1] / y_b_ts) * xi_y_emg_b + nub_emg[x]
+	log(wrG_b_t[0] / wrG_b_ts) = rho_emg_b * log(wrG_b_t[-1] / wrG_b_ts) - log(BG_b_t[-1] / BG_b_ts) * xi_b_emg_b + log(y_b_t[-1] / y_b_ts) * xi_y_emg_b + psi_mg_b * nub_emg[x] + (1 - psi_mg_b) * AUX_EXO_LAG_230_0[-1]
 
 	y_a_t[0] = yG_a_t[0] * exp(a_a_t[0]) * A_a * exp(z_g_t[0]) * k_a_t[-1] ^ rho_a * nP_a_t[0] ^ (1 - rho_a) - FC_a
 
@@ -394,6 +394,42 @@ using MacroModelling
 	def_a_obs[0] = ( - (BG_a_t[0] - BG_a_t[-1])) / (pr_aa_t[0] * GDP_a_t[0])
 
 	def_b_obs[0] = ( - (BG_b_t[0] - BG_b_t[-1])) / (pr_bb_t[0] * GDP_b_t[0])
+
+	AUX_EXO_LAG_211_0[0] = nua_ecG[x]
+
+	AUX_EXO_LAG_212_0[0] = nub_ecG[x]
+
+	AUX_EXO_LAG_221_0[0] = nua_einG[x]
+
+	AUX_EXO_LAG_222_0[0] = nub_einG[x]
+
+	AUX_EXO_LAG_225_0[0] = nua_eTR[x]
+
+	AUX_EXO_LAG_226_0[0] = nub_eTR[x]
+
+	AUX_EXO_LAG_227_0[0] = nua_eT[x]
+
+	AUX_EXO_LAG_228_0[0] = nub_eT[x]
+
+	AUX_EXO_LAG_215_0[0] = nua_etauw[x]
+
+	AUX_EXO_LAG_216_0[0] = nub_etauw[x]
+
+	AUX_EXO_LAG_217_0[0] = nua_etausc[x]
+
+	AUX_EXO_LAG_218_0[0] = nub_etausc[x]
+
+	AUX_EXO_LAG_219_0[0] = nua_etauc[x]
+
+	AUX_EXO_LAG_220_0[0] = nub_etauc[x]
+
+	AUX_EXO_LAG_223_0[0] = nua_enG[x]
+
+	AUX_EXO_LAG_224_0[0] = nub_enG[x]
+
+	AUX_EXO_LAG_229_0[0] = nua_emg[x]
+
+	AUX_EXO_LAG_230_0[0] = nub_emg[x]
 
 end
 
@@ -849,15 +885,43 @@ end
 
 	i_c_ts = i_a_ts
 
+	i_Ga_ts = i_a_ts
+
+	i_Gb_ts = i_b_ts
+
 	i_policy_ts = i_a_ts
+
+	Rk_a_ts = i_a_ts
+
+	Rk_b_ts = i_b_ts
 
 	q_a_ts = 1
 
 	q_b_ts = 1
 
+	rk_a_ts = ((1+Rk_a_ts)/pi_ts-tauk_a*delta_a-(1-delta_a))/(1-tauk_a)
+
+	rk_b_ts = ((1+Rk_b_ts)/pi_ts-tauk_b*delta_b-(1-delta_b))/(1-tauk_b)
+
+	mcr_a_ts = (1-tau_a)*(theta_a-1)/theta_a
+
+	mcr_b_ts = (1-tau_b)*(theta_b-1)/theta_b
+
 	in_a_ts = GDP_a_ts*0.172
 
 	in_b_ts = 0.193*GDP_b_ts
+
+	k_a_ts = in_a_ts/delta_a
+
+	k_b_ts = in_b_ts/delta_b
+
+	l_o_a_ts = l_a_ts
+
+	l_o_b_ts = l_b_ts
+
+	l_r_a_ts = l_a_ts
+
+	l_r_b_ts = l_b_ts
 
 	n_a_ts = l_a_ts*(1-ur_a_ts)
 
@@ -867,9 +931,17 @@ end
 
 	nG_b_ts = n_b_ts*gn_b
 
-	wr_a_ts = (((1+i_a_ts)/pi_ts-tauk_a*delta_a-(1-delta_a))/(1-tauk_a))*((n_a_ts-nG_a_ts)/(in_a_ts/delta_a))^(-1)*(1-rho_a)/(rho_a*(1+tausc_a))
+	nP_a_ts = n_a_ts-nG_a_ts
 
-	wr_b_ts = (((1+i_b_ts)/pi_ts-tauk_b*delta_b-(1-delta_b))/(1-tauk_b))*((n_b_ts-nG_b_ts)/(in_b_ts/delta_b))^(-1)*(1-rho_b)/(rho_b*(1+tausc_b))
+	nP_b_ts = n_b_ts-nG_b_ts
+
+	n_k_a = nP_a_ts/k_a_ts
+
+	n_k_b = nP_b_ts/k_b_ts
+
+	wr_a_ts = rk_a_ts*n_k_a^(-1)*(1-rho_a)/(rho_a*(1+tausc_a))
+
+	wr_b_ts = rk_b_ts*n_k_b^(-1)*(1-rho_b)/(rho_b*(1+tausc_b))
 
 	wrG_a_ts = wr_a_ts*(1+mg_a)
 
@@ -879,13 +951,21 @@ end
 
 	y_b_ts = GDP_b_ts-nG_b_ts*(1+tausc_b)*wrG_b_ts
 
-	A_a = (1+tausc_a)*wr_a_ts*((n_a_ts-nG_a_ts)/(in_a_ts/delta_a))^rho_a/((1-rho_a)*((1-tau_a)*(theta_a-1)/theta_a))
+	A_a = (1+tausc_a)*wr_a_ts*n_k_a^rho_a/((1-rho_a)*mcr_a_ts)
 
-	A_b = (1+tausc_b)*wr_b_ts*((n_b_ts-nG_b_ts)/(in_b_ts/delta_b))^rho_b/((1-rho_b)*((1-tau_b)*(theta_b-1)/theta_b))
+	A_b = (1+tausc_b)*wr_b_ts*n_k_b^rho_b/((1-rho_b)*mcr_b_ts)
 
-	FC_a = A_a*(in_a_ts/delta_a)^rho_a*(n_a_ts-nG_a_ts)^(1-rho_a)-y_a_ts
+	k_o_a_ts = k_a_ts/(1-mu_a)
 
-	FC_b = A_b*(in_b_ts/delta_b)^rho_b*(n_b_ts-nG_b_ts)^(1-rho_b)-y_b_ts
+	k_o_b_ts = k_b_ts/(1-mu_b)
+
+	in_o_a_ts = in_a_ts/(1-mu_a)
+
+	in_o_b_ts = in_b_ts/(1-mu_b)
+
+	FC_a = A_a*k_a_ts^rho_a*nP_a_ts^(1-rho_a)-y_a_ts
+
+	FC_b = A_b*k_b_ts^rho_b*nP_b_ts^(1-rho_b)-y_b_ts
 
 	BG_a_ts = GDP_a_ts*2.4
 
@@ -899,9 +979,13 @@ end
 
 	inG_b_ts = GDP_b_ts*gin_b
 
-	z_a = yG_a_ts/((inG_a_ts/delta_a)^eta_kG_a*nG_a_ts^eta_nG_a)
+	kG_a_ts = inG_a_ts/delta_a
 
-	z_b = yG_b_ts/((inG_b_ts/delta_b)^eta_kG_b*nG_b_ts^eta_nG_b)
+	kG_b_ts = inG_b_ts/delta_b
+
+	z_a = yG_a_ts/(kG_a_ts^eta_kG_a*nG_a_ts^eta_nG_a)
+
+	z_b = yG_b_ts/(kG_b_ts^eta_kG_b*nG_b_ts^eta_nG_b)
 
 	UB_a = wr_a_ts*rrs_a*(1-tauw_a)
 
@@ -913,6 +997,12 @@ end
 
 	y_c_ts = (y_a_ts+y_b_ts)/2
 
+	cG_c_ts = gc_c*y_c_ts
+
+	in_c_ts = in_c*y_c_ts
+
+	c_c_ts = c_c*y_c_ts
+
 	n_ab = GDP_a_ts*0.130/(in_a_ts+c_a_ts)
 
 	n_ac = GDP_a_ts*0.229/(in_a_ts+c_a_ts)
@@ -921,13 +1011,23 @@ end
 
 	n_bc = n_ac
 
-	n_ca = ((in_a_ts+c_a_ts)*n_ab+(in_a_ts+c_a_ts)*n_ac-(in_b_ts+c_b_ts)*pop_b/pop_a*n_ba)/(pop_c/pop_a*((c_c*y_c_ts)+(in_c*y_c_ts)))
+	n_ca = ((in_a_ts+c_a_ts)*n_ab+(in_a_ts+c_a_ts)*n_ac-(in_b_ts+c_b_ts)*pop_b/pop_a*n_ba)/(pop_c/pop_a*(c_c_ts+in_c_ts))
 
-	n_cb = ((in_b_ts+c_b_ts)*n_ba+(in_b_ts+c_b_ts)*n_bc-(in_a_ts+c_a_ts)*n_ab*pop_a/pop_b)/(((c_c*y_c_ts)+(in_c*y_c_ts))*pop_c/pop_b)
+	n_cb = ((in_b_ts+c_b_ts)*n_ba+(in_b_ts+c_b_ts)*n_bc-(in_a_ts+c_a_ts)*n_ab*pop_a/pop_b)/((c_c_ts+in_c_ts)*pop_c/pop_b)
 
 	n_aa = 1-n_ab-n_ac
 
 	n_bb = 1-n_ba-n_bc
+
+	n_cc = 1-n_ca-n_cb
+
+	vtheta_ab    = n_ab/pop_b*(pop_a + pop_b + pop_c)
+
+	vtheta_ac    = n_ac/pop_c*(pop_a + pop_b + pop_c)
+
+	vtheta_ba   = n_ba/pop_a*(pop_a + pop_b + pop_c)
+
+	vtheta_bc  = n_bc/(pop_c)*(pop_a + pop_b + pop_c)
 
 	nfa_a_ts = 0
 
@@ -943,29 +1043,61 @@ end
 
 	B_bc_ts = 0
 
-	kappaw_a_ts = ((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*((n_a_ts-nG_a_ts)*wr_a_ts*(1-tauw_a)+nG_a_ts*wrG_a_ts*(1-tauw_a)+UB_a*(l_a_ts-n_a_ts))/(n_a_ts*l_a_ts^psi_a)
+	c_r_a_ts = c_a_ts
 
-	thetaw_a = (1-tauw_a)*wr_a_ts*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*((n_a_ts-nG_a_ts)-(n_a_ts-nG_a_ts)*((UB_a*(1-mu_a)*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))/(((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*UB_a-n_a_ts*psi_a*l_a_ts^(psi_a-1)*kappaw_a_ts))+(UB_a*mu_a*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))/(((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*UB_a-kappaw_a_ts*n_a_ts*psi_a*l_a_ts^(psi_a-1)))))/((1-tauw_a)*wr_a_ts*(n_a_ts-nG_a_ts)*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))-(n_a_ts-nG_a_ts)*kappaw_a_ts*n_a_ts^psi_a-(n_a_ts-nG_a_ts)*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*UB_a-((UB_a*(1-mu_a)*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))/(((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*UB_a-n_a_ts*psi_a*l_a_ts^(psi_a-1)*kappaw_a_ts))+(UB_a*mu_a*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))/(((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*UB_a-kappaw_a_ts*n_a_ts*psi_a*l_a_ts^(psi_a-1))))*((n_a_ts-nG_a_ts)*(1-tauw_a)*wr_a_ts*((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))-((c_a_ts-c_a_ts*hab_a)^(-sigma_a)/(1+tauc_a))*(n_a_ts-nG_a_ts)*UB_a-l_a_ts^psi_a*(n_a_ts-nG_a_ts)*kappaw_a_ts))
+	c_r_b_ts = c_b_ts
 
-	kappaw_b_ts = ((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*((n_b_ts-nG_b_ts)*wr_b_ts*(1-tauw_b)+nG_b_ts*wrG_b_ts*(1-tauw_b)+UB_b*(l_b_ts-n_b_ts))/(n_b_ts*l_b_ts^psi_b)
+	c_o_a_ts = c_a_ts
 
-	thetaw_b = (1-tauw_b)*wr_b_ts*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*((n_b_ts-nG_b_ts)-(n_b_ts-nG_b_ts)*((UB_b*(1-mu_b)*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))/(((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*UB_b-n_b_ts*psi_b*l_b_ts^(psi_b-1)*kappaw_b_ts))+(UB_b*mu_b*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))/(((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*UB_b-kappaw_b_ts*n_b_ts*psi_b*l_b_ts^(psi_b-1)))))/((1-tauw_b)*wr_b_ts*(n_b_ts-nG_b_ts)*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))-(n_b_ts-nG_b_ts)*kappaw_b_ts*n_b_ts^psi_b-(n_b_ts-nG_b_ts)*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*UB_b-((UB_b*(1-mu_b)*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))/(((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*UB_b-n_b_ts*psi_b*l_b_ts^(psi_b-1)*kappaw_b_ts))+(UB_b*mu_b*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))/(((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*UB_b-kappaw_b_ts*n_b_ts*psi_b*l_b_ts^(psi_b-1))))*((n_b_ts-nG_b_ts)*(1-tauw_b)*wr_b_ts*((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))-((c_b_ts-c_b_ts*hab_b)^(-sigma_b)/(1+tauc_b))*(n_b_ts-nG_b_ts)*UB_b-l_b_ts^psi_b*(n_b_ts-nG_b_ts)*kappaw_b_ts))
+	c_o_b_ts = c_b_ts
 
-	TR_r_a_ts = (1+tauc_a)*c_a_ts-(1-tauw_a)*(wr_a_ts*(n_a_ts-nG_a_ts)+nG_a_ts*wrG_a_ts)-UB_a*(l_a_ts-n_a_ts)
+	c_tild_a_ts = c_o_a_ts
+
+	c_tild_b_ts = c_o_b_ts
+
+	lambda_o_a_ts = (c_tild_a_ts-c_tild_a_ts*hab_a)^(-sigma_a)/(1+tauc_a)
+
+	lambda_o_b_ts = (c_tild_b_ts-c_tild_b_ts*hab_b)^(-sigma_b)/(1+tauc_b)
+
+	kappaw_a_ts = lambda_o_a_ts*(nP_a_ts*wr_a_ts*(1-tauw_a)+nG_a_ts*wrG_a_ts*(1-tauw_a)+UB_a*(l_o_a_ts-n_a_ts))/(n_a_ts*l_o_a_ts^psi_a)
+
+	omega_o_a_ts = UB_a*(1-mu_a)*lambda_o_a_ts/(lambda_o_a_ts*UB_a-n_a_ts*psi_a*l_o_a_ts^(psi_a-1)*kappaw_a_ts)
+
+	omega_r_a_ts = UB_a*mu_a*lambda_o_a_ts/(lambda_o_a_ts*UB_a-kappaw_a_ts*n_a_ts*psi_a*l_r_a_ts^(psi_a-1))
+
+	thetaw_a = (1-tauw_a)*wr_a_ts*lambda_o_a_ts*(nP_a_ts-nP_a_ts*(omega_o_a_ts+omega_r_a_ts))/((1-tauw_a)*wr_a_ts*nP_a_ts*lambda_o_a_ts-nP_a_ts*kappaw_a_ts*n_a_ts^psi_a-nP_a_ts*lambda_o_a_ts*UB_a-(omega_o_a_ts+omega_r_a_ts)*(nP_a_ts*(1-tauw_a)*wr_a_ts*lambda_o_a_ts-lambda_o_a_ts*nP_a_ts*UB_a-l_o_a_ts^psi_a*nP_a_ts*kappaw_a_ts))
+
+	kappaw_b_ts = lambda_o_b_ts*(nP_b_ts*wr_b_ts*(1-tauw_b)+nG_b_ts*wrG_b_ts*(1-tauw_b)+UB_b*(l_o_b_ts-n_b_ts))/(n_b_ts*l_o_b_ts^psi_b)
+
+	omega_o_b_ts = UB_b*(1-mu_b)*lambda_o_b_ts/(lambda_o_b_ts*UB_b-n_b_ts*psi_b*l_o_b_ts^(psi_b-1)*kappaw_b_ts)
+
+	omega_r_b_ts = UB_b*mu_b*lambda_o_b_ts/(lambda_o_b_ts*UB_b-kappaw_b_ts*n_b_ts*psi_b*l_r_b_ts^(psi_b-1))
+
+	thetaw_b = (1-tauw_b)*wr_b_ts*lambda_o_b_ts*(nP_b_ts-nP_b_ts*(omega_o_b_ts+omega_r_b_ts))/((1-tauw_b)*wr_b_ts*nP_b_ts*lambda_o_b_ts-nP_b_ts*kappaw_b_ts*n_b_ts^psi_b-nP_b_ts*lambda_o_b_ts*UB_b-(omega_o_b_ts+omega_r_b_ts)*(nP_b_ts*(1-tauw_b)*wr_b_ts*lambda_o_b_ts-lambda_o_b_ts*nP_b_ts*UB_b-l_o_b_ts^psi_b*nP_b_ts*kappaw_b_ts))
+
+	ex_a_ts = (in_b_ts+c_b_ts)*pop_b/pop_a*n_ba+pop_c/pop_a*n_ca*(y_c_ts*c_c+y_c_ts*in_c)
+
+	im_a_ts = pr_ts*(c_a_ts*n_ab+in_a_ts*n_ab)+pr_ts*(c_a_ts*n_ac+in_a_ts*n_ac)
+
+	ex_b_ts = (in_a_ts+c_a_ts)*n_ab*pop_a/pop_b+(y_c_ts*c_c+y_c_ts*in_c)*pop_c/pop_b*n_cb
+
+	im_b_ts = pr_ts*(c_b_ts*n_ba+in_b_ts*n_ba)+pr_ts*(c_b_ts*n_bc+in_b_ts*n_bc)
+
+	TR_r_a_ts = (1+tauc_a)*c_r_a_ts-(1-tauw_a)*(wr_a_ts*nP_a_ts+nG_a_ts*wrG_a_ts)-UB_a*(l_r_a_ts-n_a_ts)
 
 	TR_a_ts = y_a_ts*gTR_a-UB_a*(l_a_ts-n_a_ts)
 
 	TR_o_a_ts = (TR_a_ts-mu_a*TR_r_a_ts)/(1-mu_a)
 
-	T_a_ts = (TR_a_ts+UB_a*(l_a_ts-n_a_ts)+nG_a_ts*(1+tausc_a)*wrG_a_ts+inG_a_ts+cG_a_ts-(wr_a_ts*(n_a_ts-nG_a_ts)+nG_a_ts*wrG_a_ts)*(tausc_a+tauw_a)-(in_a_ts/delta_a)*tauk_a*((((1+i_a_ts)/pi_ts-tauk_a*delta_a-(1-delta_a))/(1-tauk_a))-delta_a)-tau_a*y_a_ts-c_a_ts*tauc_a+(1+i_a_ts)*BG_a_ts/pi_ts-BG_a_ts)/(1-mu_a)
+	T_a_ts = (TR_a_ts+UB_a*(l_a_ts-n_a_ts)+nG_a_ts*(1+tausc_a)*wrG_a_ts+inG_a_ts+cG_a_ts-(wr_a_ts*nP_a_ts+nG_a_ts*wrG_a_ts)*(tausc_a+tauw_a)-k_a_ts*tauk_a*(rk_a_ts-delta_a)-tau_a*y_a_ts-c_a_ts*tauc_a+(1+i_Ga_ts)*BG_a_ts/pi_ts-BG_a_ts)/(1-mu_a)
 
-	TR_r_b_ts = (1+tauc_b)*c_b_ts-(1-tauw_b)*(wr_b_ts*(n_b_ts-nG_b_ts)+nG_b_ts*wrG_b_ts)-UB_b*(l_b_ts-n_b_ts)
-	# in the model
+	TR_r_b_ts = (1+tauc_b)*c_r_b_ts-(1-tauw_b)*(wr_b_ts*nP_b_ts+nG_b_ts*wrG_b_ts)-UB_b*(l_r_b_ts-n_b_ts)
+
 	TR_b_ts = y_b_ts*gTR_b-UB_b*(l_b_ts-n_b_ts)
-	# in the model
+
 	TR_o_b_ts = (TR_b_ts-mu_b*TR_r_b_ts)/(1-mu_b)
-	# in the model
-	T_b_ts = (TR_b_ts+UB_b*(l_b_ts-n_b_ts)+nG_b_ts*(1+tausc_b)*wrG_b_ts+inG_b_ts+cG_b_ts-(wr_b_ts*(n_b_ts-nG_b_ts)+nG_b_ts*wrG_b_ts)*(tausc_b+tauw_b)-(in_b_ts/delta_b)*tauk_b*((((1+i_b_ts)/pi_ts-tauk_b*delta_b-(1-delta_b))/(1-tauk_b))-delta_b)-tau_b*y_b_ts-c_b_ts*tauc_b+(1+i_b_ts)*BG_b_ts/pi_ts-BG_b_ts)/(1-mu_b)
+
+	T_b_ts = (TR_b_ts+UB_b*(l_b_ts-n_b_ts)+nG_b_ts*(1+tausc_b)*wrG_b_ts+inG_b_ts+cG_b_ts-(wr_b_ts*nP_b_ts+nG_b_ts*wrG_b_ts)*(tausc_b+tauw_b)-k_b_ts*tauk_b*(rk_b_ts-delta_b)-tau_b*y_b_ts-c_b_ts*tauc_b+(1+i_Gb_ts)*BG_b_ts/pi_ts-BG_b_ts)/(1-mu_b)
 
 end
 
